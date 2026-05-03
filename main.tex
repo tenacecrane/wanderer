@@ -23,7 +23,7 @@
 \maketitle
 
 \begin{abstract}
-Green's functions appear in a plethora of disciplines across physical sciences and engineering. These include electromagnetics, acoustics, fluid dynamics, and many others. In many disciplines, to solve non-trivial problems with these functions, one must apply these concepts computationally. As such, it is not uncommon to encounter what is known as the ``wandering computer scientist'' that aims to become a computational expert in a domain that they did not grow up with. In this paper we will explore Green's functions from the perspective of one of these graduate students, referred to hereafter as ``The Wanderer'', and survey various applications of the Green's function in computational electromagnetics.
+Green's functions appear in a plethora of disciplines across physical sciences and engineering. These include electromagnetics, acoustics, fluid dynamics, and many others. In many disciplines, to solve non-trivial problems with these functions, one must apply these concepts computationally. As such, it is not uncommon to encounter what is known as the ``wandering computer scientist'' that aims to become a computational expert in a domain that they did not grow up with. In this paper we will explore Green's functions from the perspective of one of these graduate students, referred to hereafter as the ``Wanderer'', and survey various applications of the Green's function in computational electromagnetics. We will derive the scalar Green's function in 1-D, 2-D, and 3-D, and then apply these functions to a practical problem in electromagnetics. Finally, we will discuss computational considerations for implementing Green's functions and discuss the future of the Wanderer in this field.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -31,9 +31,14 @@ Green's functions, computational electromagnetics, computational methods, mathem
 \end{IEEEkeywords}
 
 \section{Introduction}
-\IEEEPARstart{T}{he} Wanderer's journey begins at the edge of a field, a place that they did not come from. Ahead, there is a group of peers that have been in this field for many years. To catch up, The Wanderer must equip themselves with the tools of the trade. When this eventually happens, they will find themselves equipped with more than enough to solve problems of a higher caliber.
+\IEEEPARstart{T}{he} Wanderer's journey begins at the edge of a field, a place that they did not come from. Ahead, there is a group of peers that have been in this field for many years. To catch up, the Wanderer must equip themselves with the tools of the trade. When this eventually happens, they will find themselves equipped with more than enough to solve problems of a higher caliber.
 
-So why study the Green's function? In electromagnetics, a great deal of problem-solving is related to a set of functions called Maxwell's equations. These equations can be written in integral and differential forms. Treating Maxwell's equations as a set of differential equations opens up our toolbox and sets the stage for learning about Green's functions as one of those tools. Green's functions allow a simpler representation of differential equations, one that can be easily discretized. Discretized. That word piques the interest of The Wanderer, as they know that anything that can be discretized can be approached computationally.
+So why study the Green's function? In electromagnetics, a great deal of problem-solving is related to a set of functions called Maxwell's equations. These equations can be written in integral and differential forms. Treating Maxwell's equations as a set of differential equations opens up our toolbox and sets the stage for learning about Green's functions as one of those tools. Green's functions allow a simpler representation of differential equations, one that can be easily discretized. Discretized. That word piques the interest of the Wanderer, as they know that anything that can be discretized can be approached computationally.
+
+To first understand the Green's function, we have to form building blocks using the Wanderer's prior knowledge. Most wandering computer scientists have a background in linear algebra and calculus. Building on that, we can introduce two fundamental concepts: a linear operator, and the delta function.
+
+\section{The Building Blocks of Green's Functions}
+In linear algebra, we can solve matrix problems of the form $Ax = b$, where $A$ is a matrix, $x$ is a vector of unknowns, and $b$ is a vector of knowns. To solve for $x$, we invert $A$ and apply it to $b$, which gives us $x = A^{-1}b$. In differential equations, we can write a similar problem as $L u = f$, where $L$ is a linear operator, $u$ is the unknown function, and $f$ is the known source function. Just like matrices, which are operators that act on vectors, a linear operator is simply a function that acts on another function. So how do we invert a linear operator? This is where the Green's function comes into play.
 
 \section{Derivation of Scalar Green's Functions in 1-D, 2-D, and 3-D}
 
@@ -44,16 +49,9 @@ So why study the Green's function? In electromagnetics, a great deal of problem-
 
 \section{The Wanderer's Frontier}
 
-\begin{thebibliography}{1}
+\nocite{*}
 \bibliographystyle{IEEEtran}
-
-\bibitem{ref1}
-{\it{Mathematics Into Type}}. American Mathematical Society. [Online]. Available: https://www.ams.org/arc/styleguide/mit-2.pdf
-
-\bibitem{ref2}
-T. W. Chaundy, P. R. Barrett and C. Batey, {\it{The Printing of Mathematics}}. London, U.K., Oxford Univ. Press, 1954.
-
-\end{thebibliography}
+\bibliography{references}
 
 
 \newpage

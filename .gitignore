@@ -17,3 +17,19 @@
 
 # Keep the PDF output
 !main.pdf
+
+# Generic backup files
+*~
+*.bak
+*.backup
+*.swp
+*.swo
+.DS_Store
+
+# Temporary files created by editors
+*.tmp
+*.temp
+*.~*
+
+# The main pdf output
+main.pdf
