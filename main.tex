@@ -15,7 +15,7 @@
 
 \begin{document}
 
-\title{Green's Functions\\ A Manual for the Wandering Computer Scientist}
+\title{Green's Functions:\\ A Manual for the Wandering Computer Scientist}
 
 \author{Tenace Crane,~\IEEEmembership{IEEE Graduate Member}
 }
@@ -31,14 +31,40 @@ Green's functions, computational electromagnetics, computational methods, mathem
 \end{IEEEkeywords}
 
 \section{Introduction}
-\IEEEPARstart{T}{he} Wanderer's journey begins at the edge of a field, a place that they did not come from. Ahead, there is a group of peers that have been in this field for many years. To catch up, the Wanderer must equip themselves with the tools of the trade. When this eventually happens, they will find themselves equipped with more than enough to solve problems of a higher caliber.
+\IEEEPARstart{T}{he} Wanderer's journey begins at the edge of a field, a place that they did not come from. Ahead, there is a group of peers that have been in this field for many years. To catch up, the Wanderer must equip themselves with the tools of the trade. When this eventually happens, they will find themselves equipped with more than enough to solve problems of a higher caliber. One of these tools is the Green's function.
+
+The Green's function was first introduced by George Green in an essay he wrote in 1828 \cite{green}. He was, in a way, a Wanderer himself. He was a completely self-taught mathematician from a small suburb in Nottingham. Most of his contributions were even done in his spare time and late life, since he spent most of his time with his original family discipline, milling. Other than mathematics, also branched out into physics and engineering, proving that the confines of a field are not as rigid as they may seem. He serves as an inspiration for the Wanderer, as he was able to make strides simply by being curious and persistent.
 
 So why study the Green's function? In electromagnetics, a great deal of problem-solving is related to a set of functions called Maxwell's equations. These equations can be written in integral and differential forms. Treating Maxwell's equations as a set of differential equations opens up our toolbox and sets the stage for learning about Green's functions as one of those tools. Green's functions allow a simpler representation of differential equations, one that can be easily discretized. Discretized. That word piques the interest of the Wanderer, as they know that anything that can be discretized can be approached computationally.
+
+In this paper we will provide a manual for Green's functions framed as a guide for the Wanderer. First, we will start with the building blocks of Green's functions. With those building blocks we will then derive the scalar Green's function in the first three dimensions. Then we will introduce the Hertzian dipole and solve for the electric field using the Green's function. We will then cover computational considerations. Finally, we will close with a discussion of what learning Green's functions means for the future of the Wanderer.
 
 To first understand the Green's function, we have to form building blocks using the Wanderer's prior knowledge. Most wandering computer scientists have a background in linear algebra and calculus. Building on that, we can introduce two fundamental concepts: a linear operator, and the delta function.
 
 \section{The Building Blocks of Green's Functions}
-In linear algebra, we can solve matrix problems of the form $Ax = b$, where $A$ is a matrix, $x$ is a vector of unknowns, and $b$ is a vector of knowns. To solve for $x$, we invert $A$ and apply it to $b$, which gives us $x = A^{-1}b$. In differential equations, we can write a similar problem as $L u = f$, where $L$ is a linear operator, $u$ is the unknown function, and $f$ is the known source function. Just like matrices, which are operators that act on vectors, a linear operator is simply a function that acts on another function. So how do we invert a linear operator? This is where the Green's function comes into play.
+In linear algebra, we can solve matrix problems of the form $Ax = b$, where $A$ is a matrix, $x$ is a vector of unknowns, and $b$ is a vector of knowns. To solve for $x$, we invert $A$ and apply it to $b$, which gives us $x = A^{-1}b$. Once we have the inverted matrix, with any $b$ we can find the solution by way of simple matrix vector multiplication.
+
+Following Harrington's notation \cite{harrington}, we can write a similar problem for differential equations as $Lf = g$, where $L$ is a linear operator, $f$ is the unknown function, and $g$ is the known source function. Just like matrices, which are operators that act on vectors, a linear operator is simply a function that acts on another function. So how do we invert a linear operator? This is where the Green's function comes into play. The Green's function, $G$, is the inverse of the linear operator $L$. With the inverse of $L$, for any given source function $g$, we can find the solution $f$ by way of an integral. The solution can then be written as Eq. \eqref{gf}.
+
+\begin{equation}
+    \label{gf}
+    f(x) = L^{-1} g = \int G(x, x')\,g(x')\,dx'
+\end{equation}
+
+Since the Green's function is a function itself, it also has a solution. To find that solution we take advantage of the properties of the Dirac delta function. This function is simply one that is zero everywhere except at a single point, where it is infinite. The Dirac delta function, $\delta(x)$, has a special property called the sifting property, Eq. \eqref{sifting}.
+
+\begin{equation}
+    \label{sifting}
+    \int f(x)\,\delta(x - x')\,dx = f(x')
+\end{equation}
+
+What this allows us to do is extract the value of $f$ at any point in the domain $x'$. While simple, this property is powerful. Applied to Eq. \eqref{gf}, sifting tells us that if we let the source $g$ be a spike at $x'$, the integral results in $G(x, x')$ itself. The Green's function $G(x, x')$ is the response at $x$ to that spike at $x'$. Applying $L$ to both sides yields the equation that defines $G$, Eq. \eqref{gf_solution}.
+
+\begin{equation}
+    \label{gf_solution}
+    L G(x, x') = \delta(x - x')
+\end{equation}
+
 
 \section{Derivation of Scalar Green's Functions in 1-D, 2-D, and 3-D}
 
